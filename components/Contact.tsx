@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
-import { Mail, Phone, MapPin, SendHorizontal, Lock, CheckCircle, Copy, Linkedin, Loader2, Check, AlertCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, SendHorizontal, Lock, CheckCircle, Copy, Linkedin, Loader2, Check, AlertCircle, Github } from 'lucide-react';
 
 const Contact: React.FC = () => {
   const [buttonStatus, setButtonStatus] = useState<'idle' | 'loading' | 'success'>('idle');
@@ -48,7 +48,8 @@ const Contact: React.FC = () => {
     email: "Abhijeet.maske@yahoo.com",
     phone: "+91 84849 44797",
     location: "Pune, India",
-    linkedin: "https://www.linkedin.com/search/results/all/?keywords=${encodeURIComponent('Abhijeet Maske Pune')}"
+    linkedin: "https://www.linkedin.com/in/abhijeet-r-maske",
+    github: "https://github.com/AbhijeetMaske"
   };
 
   const validateForm = () => {
@@ -144,10 +145,10 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <section id="contact" ref={sectionRef} className="py-24 bg-gradient-to-br from-slate-900 to-blue-900 text-white relative overflow-hidden" aria-label="Contact Section">
+    <section id="contact" ref={sectionRef} className="py-24 bg-transparent text-foreground relative overflow-hidden" aria-label="Contact Section">
       {/* Background Decor */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-      <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+      <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+      <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-500/5 dark:bg-purple-500/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="flex flex-wrap lg:gap-16 items-start">
@@ -155,8 +156,8 @@ const Contact: React.FC = () => {
           {/* Contact Info Column (Left) */}
           <div className="w-full lg:w-5/12 mb-12 lg:mb-0">
             <div className={`mb-10 transition-all duration-700 ease-out transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8'}`}>
-              <h2 className="text-4xl font-bold mb-6 tracking-tight">Let's Connect</h2>
-              <p className="text-blue-100 text-lg leading-relaxed opacity-90">
+              <h2 className="text-4xl font-bold mb-6 tracking-tight text-foreground">Let's Connect</h2>
+              <p className="text-muted-foreground text-lg leading-relaxed opacity-90">
                 I'm available to lead high-impact projects and drive product delivery excellence. 
                 {isUnlocked 
                   ? " Here are my direct contact details:" 
@@ -167,27 +168,27 @@ const Contact: React.FC = () => {
             <div className="space-y-6">
               {/* Email Card Wrapper */}
               <div className={`transition-all duration-700 delay-100 ease-out transform ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}>
-                <div className={`relative group bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-4 transition-all duration-300 ${!isUnlocked && 'hover:bg-white/10'}`}>
+                <div className={`relative group bg-card/40 backdrop-blur-sm border border-border rounded-2xl p-4 transition-all duration-300 ${!isUnlocked && 'hover:bg-card/60'}`}>
                   <div className="flex items-center gap-5">
-                    <div className="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center shrink-0 shadow-lg shadow-blue-600/20">
-                      <Mail className="w-6 h-6 text-white" />
+                    <div className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center shrink-0 shadow-lg shadow-primary/20">
+                      <Mail className="w-6 h-6 text-primary-foreground" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <span className="block text-xs font-bold text-blue-300 uppercase tracking-wider mb-0.5">Email</span>
-                      <div className="text-lg font-medium truncate">
+                      <span className="block text-xs font-bold text-primary uppercase tracking-wider mb-0.5">Email</span>
+                      <div className="text-lg font-medium truncate text-foreground">
                         {isUnlocked ? contactInfo.email : "Abhijeet.maske@..."}
                       </div>
                     </div>
                     {isUnlocked ? (
                       <button 
                         onClick={() => copyToClipboard(contactInfo.email, 'email')}
-                        className="p-2 hover:bg-white/10 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400"
+                        className="p-2 hover:bg-accent rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-primary/40"
                         aria-label="Copy email"
                       >
-                        {copiedField === 'email' ? <Check className="w-5 h-5 text-green-400" /> : <Copy className="w-5 h-5 text-blue-200" />}
+                        {copiedField === 'email' ? <Check className="w-5 h-5 text-green-600 dark:text-green-400" /> : <Copy className="w-5 h-5 text-primary" />}
                       </button>
                     ) : (
-                      <Lock className="w-5 h-5 text-gray-400 opacity-50" />
+                      <Lock className="w-5 h-5 text-muted-foreground opacity-50" />
                     )}
                   </div>
                 </div>
@@ -195,27 +196,27 @@ const Contact: React.FC = () => {
 
               {/* Phone Card Wrapper */}
               <div className={`transition-all duration-700 delay-200 ease-out transform ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}>
-                <div className={`relative group bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-4 transition-all duration-300 ${!isUnlocked && 'hover:bg-white/10'}`}>
+                <div className={`relative group bg-card/40 backdrop-blur-sm border border-border rounded-2xl p-4 transition-all duration-300 ${!isUnlocked && 'hover:bg-card/60'}`}>
                   <div className="flex items-center gap-5">
                     <div className="w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center shrink-0 shadow-lg shadow-emerald-600/20">
                       <Phone className="w-6 h-6 text-white" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <span className="block text-xs font-bold text-emerald-300 uppercase tracking-wider mb-0.5">Mobile</span>
-                      <div className="text-lg font-medium truncate">
+                      <span className="block text-xs font-bold text-emerald-600 dark:text-emerald-300 uppercase tracking-wider mb-0.5">Mobile</span>
+                      <div className="text-lg font-medium truncate text-foreground">
                         {isUnlocked ? contactInfo.phone : "+91 84849 *****"}
                       </div>
                     </div>
                     {isUnlocked ? (
                       <button 
                         onClick={() => copyToClipboard(contactInfo.phone, 'phone')}
-                        className="p-2 hover:bg-white/10 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-400"
+                        className="p-2 hover:bg-accent rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-400"
                         aria-label="Copy phone number"
                       >
-                        {copiedField === 'phone' ? <Check className="w-5 h-5 text-green-400" /> : <Copy className="w-5 h-5 text-emerald-200" />}
+                        {copiedField === 'phone' ? <Check className="w-5 h-5 text-green-600 dark:text-green-400" /> : <Copy className="w-5 h-5 text-emerald-600 dark:text-emerald-200" />}
                       </button>
                     ) : (
-                      <Lock className="w-5 h-5 text-gray-400 opacity-50" />
+                      <Lock className="w-5 h-5 text-muted-foreground opacity-50" />
                     )}
                   </div>
                 </div>
@@ -223,14 +224,14 @@ const Contact: React.FC = () => {
 
               {/* Location Card Wrapper */}
               <div className={`transition-all duration-700 delay-300 ease-out transform ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}>
-                <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-4">
+                <div className="bg-card/40 backdrop-blur-sm border border-border rounded-2xl p-4">
                   <div className="flex items-center gap-5">
                     <div className="w-12 h-12 bg-purple-600 rounded-xl flex items-center justify-center shrink-0 shadow-lg shadow-purple-600/20">
                       <MapPin className="w-6 h-6 text-white" />
                     </div>
                     <div className="flex-1">
-                      <span className="block text-xs font-bold text-purple-300 uppercase tracking-wider mb-0.5">Location</span>
-                      <div className="text-lg font-medium">{contactInfo.location}</div>
+                      <span className="block text-xs font-bold text-purple-600 dark:text-purple-300 uppercase tracking-wider mb-0.5">Location</span>
+                      <div className="text-lg font-medium text-foreground">{contactInfo.location}</div>
                     </div>
                   </div>
                 </div>
@@ -239,7 +240,7 @@ const Contact: React.FC = () => {
               {/* LinkedIn Button Wrapper */}
               <div className={`transition-all duration-700 delay-400 ease-out transform ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}>
                 <a 
-                  href={`https://www.linkedin.com/search/results/all/?keywords=${encodeURIComponent("Abhijeet Maske Pune")}`}
+                  href="https://www.linkedin.com/in/abhijeet-r-maske"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-between bg-[#0077b5] hover:bg-[#006396] text-white p-4 rounded-2xl transition-all shadow-lg hover:-translate-y-1 group"
@@ -258,6 +259,29 @@ const Contact: React.FC = () => {
                   </div>
                 </a>
               </div>
+
+              {/* GitHub Button Wrapper */}
+              <div className={`transition-all duration-700 delay-500 ease-out transform ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}>
+                <a 
+                  href="https://github.com/AbhijeetMaske"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-between bg-foreground text-background hover:brightness-110 p-4 rounded-2xl transition-all shadow-lg hover:-translate-y-1 group"
+                >
+                  <div className="flex items-center gap-5">
+                    <div className="w-12 h-12 bg-background/20 rounded-xl flex items-center justify-center">
+                      <Github className="w-6 h-6 text-background" />
+                    </div>
+                    <div>
+                      <span className="block text-xs font-bold text-background/80 uppercase tracking-wider mb-0.5">Source Control</span>
+                      <span className="text-lg font-bold">Follow on GitHub</span>
+                    </div>
+                  </div>
+                  <div className="bg-background/20 p-2 rounded-lg group-hover:bg-background/30 transition-colors">
+                    <SendHorizontal className="w-5 h-5 -rotate-45" />
+                  </div>
+                </a>
+              </div>
             </div>
           </div>
 
@@ -265,72 +289,72 @@ const Contact: React.FC = () => {
           <div className={`w-full lg:flex-1 transition-all duration-1000 delay-300 ease-out transform ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'}`}>
             <div className="relative">
               {/* Form Container */}
-              <div className={`bg-white dark:bg-slate-800 rounded-3xl p-8 lg:p-10 shadow-2xl transition-all duration-500 ${isUnlocked ? 'opacity-0 pointer-events-none absolute inset-0 scale-95' : 'opacity-100 scale-100'}`}>
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Send a Message</h3>
+              <div className={`bg-card rounded-[2.5rem] p-8 lg:p-12 shadow-sm border border-border transition-all duration-500 ${isUnlocked ? 'opacity-0 pointer-events-none absolute inset-0 scale-95' : 'opacity-100 scale-100'}`}>
+                <h3 className="text-3xl font-black text-foreground mb-8 tracking-tight">Send a Message</h3>
                 
-                <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+                <form onSubmit={handleSubmit} className="space-y-6" noValidate>
                   <div>
-                    <label className="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2" htmlFor="name">Full Name</label>
+                    <label className="block text-[10px] font-black text-muted-foreground mb-2 uppercase tracking-[0.2em]" htmlFor="name">Full Name</label>
                     <input 
                       type="text" 
                       id="name" 
                       value={formState.name}
                       onChange={handleInputChange}
-                      className={`w-full px-4 py-3.5 rounded-xl bg-gray-50 dark:bg-slate-900 border text-gray-900 dark:text-white transition-all outline-none ${
+                      className={`w-full px-5 py-4 rounded-2xl bg-accent border text-foreground transition-all outline-none font-medium ${
                         errors.name 
                           ? 'border-red-500 focus:ring-4 focus:ring-red-500/10' 
-                          : 'border-gray-200 dark:border-white/10 focus:border-blue-500 focus:bg-white dark:focus:bg-slate-900 focus:ring-4 focus:ring-blue-500/10'
+                          : 'border-border focus:border-primary focus:bg-card focus:ring-4 focus:ring-primary/10'
                       }`}
                       placeholder="John Doe"
                       required
                     />
                     {errors.name && (
-                      <p className="mt-1 text-sm text-red-500 flex items-center gap-1">
-                        <AlertCircle className="w-4 h-4" /> {errors.name}
+                      <p className="mt-1.5 text-xs text-red-500 font-bold flex items-center gap-1 uppercase tracking-wider">
+                        <AlertCircle className="w-3.5 h-3.5" /> {errors.name}
                       </p>
                     )}
                   </div>
 
                   <div>
-                    <label className="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2" htmlFor="email">Email Address</label>
+                    <label className="block text-[10px] font-black text-muted-foreground mb-2 uppercase tracking-[0.2em]" htmlFor="email">Email Address</label>
                     <input 
                       type="email" 
                       id="email" 
                       value={formState.email}
                       onChange={handleInputChange}
-                      className={`w-full px-4 py-3.5 rounded-xl bg-gray-50 dark:bg-slate-900 border text-gray-900 dark:text-white transition-all outline-none ${
+                      className={`w-full px-5 py-4 rounded-2xl bg-accent border text-foreground transition-all outline-none font-medium ${
                         errors.email
                           ? 'border-red-500 focus:ring-4 focus:ring-red-500/10' 
-                          : 'border-gray-200 dark:border-white/10 focus:border-blue-500 focus:bg-white dark:focus:bg-slate-900 focus:ring-4 focus:ring-blue-500/10'
+                          : 'border-border focus:border-primary focus:bg-card focus:ring-4 focus:ring-primary/10'
                       }`}
                       placeholder="name@company.com"
                       required
                     />
                     {errors.email && (
-                      <p className="mt-1 text-sm text-red-500 flex items-center gap-1">
-                        <AlertCircle className="w-4 h-4" /> {errors.email}
+                      <p className="mt-1.5 text-xs text-red-500 font-bold flex items-center gap-1 uppercase tracking-wider">
+                        <AlertCircle className="w-3.5 h-3.5" /> {errors.email}
                       </p>
                     )}
                   </div>
 
                   <div>
-                    <label className="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2" htmlFor="message">Message</label>
+                    <label className="block text-[10px] font-black text-muted-foreground mb-2 uppercase tracking-[0.2em]" htmlFor="message">Message</label>
                     <textarea 
                       id="message" 
                       rows={4}
                       value={formState.message}
                       onChange={handleInputChange}
-                      className={`w-full px-4 py-3.5 rounded-xl bg-gray-50 dark:bg-slate-900 border text-gray-900 dark:text-white transition-all outline-none resize-none ${
+                      className={`w-full px-5 py-4 rounded-2xl bg-accent border text-foreground transition-all outline-none resize-none font-medium ${
                         errors.message
                           ? 'border-red-500 focus:ring-4 focus:ring-red-500/10' 
-                          : 'border-gray-200 dark:border-white/10 focus:border-blue-500 focus:bg-white dark:focus:bg-slate-900 focus:ring-4 focus:ring-blue-500/10'
+                          : 'border-border focus:border-primary focus:bg-card focus:ring-4 focus:ring-primary/10'
                       }`}
                       placeholder="Hi, I'd like to discuss a project..."
                       required
                     ></textarea>
                     {errors.message && (
-                      <p className="mt-1 text-sm text-red-500 flex items-center gap-1">
-                        <AlertCircle className="w-4 h-4" /> {errors.message}
+                      <p className="mt-1.5 text-xs text-red-500 font-bold flex items-center gap-1 uppercase tracking-wider">
+                        <AlertCircle className="w-3.5 h-3.5" /> {errors.message}
                       </p>
                     )}
                   </div>
@@ -338,22 +362,22 @@ const Contact: React.FC = () => {
                   <button 
                     type="submit"
                     disabled={buttonStatus === 'loading'}
-                    className="w-full bg-blue-600 text-white font-bold py-4 rounded-xl hover:bg-blue-700 active:scale-[0.98] transition-all shadow-xl shadow-blue-500/20 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+                    className="w-full bg-primary text-primary-foreground font-black uppercase tracking-[0.2em] py-5 rounded-2xl hover:brightness-110 active:scale-[0.98] transition-all shadow-xl shadow-primary/20 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
                   >
                     {buttonStatus === 'loading' ? (
                       <>
                         <Loader2 className="w-5 h-5 animate-spin" />
-                        Sending...
+                        Transmitting...
                       </>
                     ) : (
                       <>
-                        Send Message
+                        Send Transmission
                         <SendHorizontal className="w-5 h-5" />
                       </>
                     )}
                   </button>
                   
-                  <p className="text-center text-xs text-gray-500 dark:text-gray-400 mt-4">
+                  <p className="text-center text-xs text-muted-foreground mt-4">
                     <Lock className="w-3 h-3 inline mr-1" />
                     Your details are safe. Submitting unlocks my contact info.
                   </p>
@@ -361,18 +385,18 @@ const Contact: React.FC = () => {
               </div>
 
               {/* Success Message Overlay */}
-              <div className={`bg-white dark:bg-slate-800 rounded-3xl p-8 lg:p-10 shadow-2xl flex flex-col items-center justify-center text-center h-full min-h-[500px] transition-all duration-500 ${isUnlocked ? 'opacity-100 scale-100 relative z-10' : 'opacity-0 pointer-events-none absolute inset-0 scale-95'}`}>
+              <div className={`bg-card rounded-3xl p-8 lg:p-10 shadow-2xl flex flex-col items-center justify-center text-center h-full min-h-[500px] transition-all duration-500 ${isUnlocked ? 'opacity-100 scale-100 relative z-10' : 'opacity-0 pointer-events-none absolute inset-0 scale-95'}`}>
                 <div className="w-24 h-24 bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 rounded-full flex items-center justify-center mb-6 animate-[bounce_1s_infinite]">
                   <CheckCircle className="w-12 h-12" />
                 </div>
-                <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Message Sent!</h3>
-                <p className="text-gray-600 dark:text-gray-400 mb-8 max-w-md text-lg">
+                <h3 className="text-3xl font-bold text-foreground mb-4">Message Sent!</h3>
+                <p className="text-muted-foreground mb-8 max-w-md text-lg">
                   Thank you, <strong>{formState.name}</strong>. I've received your inquiry. <br/>
                   My contact details are now unlocked on the left.
                 </p>
                 
-                <div className="p-4 bg-blue-50 dark:bg-blue-900/30 rounded-xl border border-blue-100 dark:border-blue-800 w-full max-w-sm mb-8">
-                   <p className="text-sm text-blue-800 dark:text-blue-300 font-medium flex items-center justify-center gap-2">
+                <div className="p-4 bg-primary/10 rounded-xl border border-primary/20 w-full max-w-sm mb-8">
+                   <p className="text-sm text-primary font-medium flex items-center justify-center gap-2">
                      <Mail className="w-4 h-4" /> 
                      Check your inbox for a confirmation.
                    </p>
@@ -380,7 +404,7 @@ const Contact: React.FC = () => {
 
                 <button 
                   onClick={() => setIsUnlocked(false)}
-                  className="text-gray-400 dark:text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 font-medium text-sm transition-colors"
+                  className="text-muted-foreground hover:text-primary font-medium text-sm transition-colors"
                 >
                   Send another message
                 </button>

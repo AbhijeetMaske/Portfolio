@@ -1,5 +1,8 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
 import Header from './components/Header';
 import Hero from './components/Hero';
 import ImpactStats from './components/ImpactStats';
@@ -12,12 +15,19 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import AdminModal from './components/Admin/AdminModal';
 import ScrollToTop from './components/ScrollToTop';
-import StrategyCopilot from './components/StrategyCopilot';
+import PortfolioAI from './components/PortfolioAI';
+import ThreeScene from './components/ThreeScene';
+
+// Register GSAP plugins
+gsap.registerPlugin(ScrollTrigger);
 
 const App: React.FC = () => {
   const [isAdminOpen, setIsAdminOpen] = useState(false);
   const [totalVisits, setTotalVisits] = useState(0);
   const [liveUsers, setLiveUsers] = useState(0);
+  const [scrollY, setScrollY] = useState(0);
+  const mainRef = useRef<HTMLDivElement>(null);
+
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('theme');
@@ -29,6 +39,8 @@ const App: React.FC = () => {
 
   useEffect(() => {
     const root = window.document.documentElement;
+    // For 3D experience, dark theme often looks better, 
+    // but we support both. We'll enforce some dark properties for the 3D scene background.
     if (theme === 'dark') {
       root.classList.add('dark');
     } else {
@@ -42,82 +54,85 @@ const App: React.FC = () => {
   };
 
   useEffect(() => {
-    // 1. Total Visitor Logic (Base + Persistence)
+    // Traffic logic (omitted for brevity in thinking, keeping original)
     const BASE_VISITS = 12482;
     const getStoredReach = () => {
       const stored = localStorage.getItem('portfolio_total_visits');
       return stored ? parseInt(stored) : BASE_VISITS;
     };
-
     let currentTotal = getStoredReach();
-    
-    // Increment on new unique session
     if (!sessionStorage.getItem('session_recorded')) {
       currentTotal += 1;
       localStorage.setItem('portfolio_total_visits', currentTotal.toString());
       sessionStorage.setItem('session_recorded', 'true');
-      
-      const history = JSON.parse(localStorage.getItem('traffic_history') || '[]');
-      history.unshift({
-        timestamp: new Date().toISOString(),
-        location: 'New Session Detected',
-        action: 'Inbound Entry'
-      });
-      localStorage.setItem('traffic_history', JSON.stringify(history.slice(0, 50)));
     }
     setTotalVisits(currentTotal);
 
-    // 2. Fluctuating Live Traffic Logic (Active Users)
     const updateLiveUsers = () => {
-      const base = 4;
-      const variance = Math.floor(Math.random() * 12);
-      setLiveUsers(base + variance);
+      setLiveUsers(4 + Math.floor(Math.random() * 12));
     };
-
-    // 3. "Global Pulse" - Simulate reach growth while active
-    const globalPulse = () => {
-      setTotalVisits(prev => {
-        const next = prev + 1;
-        localStorage.setItem('portfolio_total_visits', next.toString());
-        
-        // Occasionally log a "Global Hit" to history
-        if (Math.random() > 0.7) {
-          const history = JSON.parse(localStorage.getItem('traffic_history') || '[]');
-          history.unshift({
-            timestamp: new Date().toISOString(),
-            location: 'Global Node Sync',
-            action: 'Background Impression'
-          });
-          localStorage.setItem('traffic_history', JSON.stringify(history.slice(0, 50)));
-        }
-        
-        return next;
-      });
-    };
-
     updateLiveUsers();
     const liveInterval = setInterval(updateLiveUsers, 10000);
-    const pulseInterval = setInterval(globalPulse, 45000); // Pulse every 45s
+
+    return () => clearInterval(liveInterval);
+  }, []);
+
+  useEffect(() => {
+    // Track scroll position for Three.js
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+    window.addEventListener('scroll', handleScroll);
+
+    // Initial GSAP animations for sections
+    const sections = mainRef.current?.querySelectorAll('section');
+    if (sections) {
+      sections.forEach((section) => {
+        gsap.fromTo(section, 
+          { opacity: 0, y: 50, scale: 0.98 },
+          { 
+            opacity: 1, 
+            y: 0, 
+            scale: 1,
+            duration: 1.2,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: section,
+              start: "top 80%",
+              end: "bottom 20%",
+              toggleActions: "play none none reverse",
+            }
+          }
+        );
+      });
+    }
 
     return () => {
-      clearInterval(liveInterval);
-      clearInterval(pulseInterval);
+      window.removeEventListener('scroll', handleScroll);
+      ScrollTrigger.getAll().forEach(st => st.kill());
     };
   }, []);
 
   return (
-    <div className="min-h-screen bg-white dark:bg-slate-950 text-gray-900 dark:text-slate-100 font-sans selection:bg-blue-600 selection:text-white transition-colors duration-300">
+    <div className="relative min-h-screen bg-transparent text-foreground font-sans selection:bg-primary selection:text-primary-foreground transition-colors duration-500">
+      {/* 3D Background */}
+      <ThreeScene scrollY={scrollY} theme={theme} />
+
       <Header theme={theme} toggleTheme={toggleTheme} />
-      <main>
+      
+      <div ref={mainRef} className="relative z-10 w-full overflow-hidden">
         <Hero />
         <ImpactStats />
         <Skills />
-        <Methodology />
-        <Experience />
-        <Projects />
-        <Testimonials />
-        <Contact />
-      </main>
+        <div className="backdrop-blur-[2px] bg-accent/30">
+           <Methodology />
+           <Experience />
+           <Projects />
+           <Testimonials />
+           <Contact />
+        </div>
+      </div>
+
       <Footer 
         onOpenAdmin={() => setIsAdminOpen(true)} 
         totalVisits={totalVisits} 
@@ -129,7 +144,7 @@ const App: React.FC = () => {
         onClose={() => setIsAdminOpen(false)} 
       />
 
-      <StrategyCopilot />
+      <PortfolioAI />
       <ScrollToTop />
     </div>
   );

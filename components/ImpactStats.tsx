@@ -58,8 +58,8 @@ const ImpactStats: React.FC = () => {
       value: 22, 
       suffix: "+", 
       icon: Rocket, 
-      color: "text-blue-600 dark:text-blue-400",
-      bg: "bg-blue-100 dark:bg-blue-900/30"
+      color: "text-indigo-600 dark:text-blue-400",
+      bg: "bg-indigo-50 dark:bg-blue-900/30"
     },
     { 
       id: 2, 
@@ -67,8 +67,8 @@ const ImpactStats: React.FC = () => {
       value: totalExp.years, 
       customDisplay: `${totalExp.years}y ${totalExp.months}m ${totalExp.days}d`,
       icon: History, 
-      color: "text-purple-600 dark:text-purple-400",
-      bg: "bg-purple-100 dark:bg-purple-900/30"
+      color: "text-violet-600 dark:text-purple-400",
+      bg: "bg-violet-50 dark:bg-purple-900/30"
     },
     { 
       id: 3, 
@@ -76,8 +76,8 @@ const ImpactStats: React.FC = () => {
       value: 26, 
       suffix: "+", 
       icon: UsersRound, 
-      color: "text-green-600 dark:text-green-400",
-      bg: "bg-green-100 dark:bg-green-900/30"
+      color: "text-emerald-600 dark:text-green-400",
+      bg: "bg-emerald-50 dark:bg-green-900/30"
     },
     { 
       id: 4, 
@@ -86,17 +86,17 @@ const ImpactStats: React.FC = () => {
       suffix: "%", 
       icon: Zap, 
       color: "text-orange-600 dark:text-orange-400",
-      bg: "bg-orange-100 dark:bg-orange-900/30"
+      bg: "bg-orange-50 dark:bg-orange-900/30"
     }
   ];
 
   return (
     <section 
       ref={sectionRef} 
-      className="py-12 bg-white dark:bg-slate-950 -mt-10 relative z-10 container mx-auto px-4" 
+      className="py-16 bg-transparent -mt-12 relative z-10 container mx-auto px-4" 
       aria-label="Impact Statistics"
     >
-      <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-xl dark:shadow-none border border-gray-100 dark:border-white/5 p-8 grid grid-cols-2 md:grid-cols-4 gap-8">
+      <div className="bg-card/90 rounded-[2.5rem] shadow-xl border border-border p-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12 backdrop-blur-xl">
         {stats.map((stat) => (
           <Counter 
             key={stat.id} 
@@ -136,14 +136,14 @@ const Counter: React.FC<{ stat: any, isVisible: boolean }> = ({ stat, isVisible 
   const Icon = stat.icon;
 
   return (
-    <div className="flex flex-col items-center text-center group">
-      <div className={`w-12 h-12 ${stat.bg} rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
-        <Icon className={`w-6 h-6 ${stat.color}`} aria-hidden="true" />
+    <div className="flex flex-col items-center text-center group scale-110 lg:scale-125 transition-transform">
+      <div className={`w-16 h-16 ${stat.bg} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-sm`}>
+        <Icon className={`w-8 h-8 ${stat.color}`} aria-hidden="true" />
       </div>
-      <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-1">
+      <div className="text-3xl sm:text-4xl lg:text-5xl font-black text-card-foreground mb-2 tracking-tighter">
         {stat.customDisplay ? stat.customDisplay : `${count}${stat.suffix || ''}`}
       </div>
-      <div className="text-[10px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-[0.2em]">
+      <div className="text-[11px] font-black text-muted-foreground uppercase tracking-[0.3em]">
         {stat.label}
       </div>
     </div>
