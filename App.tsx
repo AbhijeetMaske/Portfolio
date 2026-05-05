@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Analytics } from '@vercel/analytics/react';
 
 import Header from './components/Header';
 import Hero from './components/Hero';
@@ -146,6 +147,7 @@ const App: React.FC = () => {
 
       <PortfolioAI />
       <ScrollToTop />
+      <Analytics />
     </div>
   );
 };
