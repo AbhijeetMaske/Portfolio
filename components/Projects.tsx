@@ -1,7 +1,39 @@
 
 import React, { useState, useEffect, useRef } from 'react';
-import { Tag, X, ChevronRight, Calendar, User, Users, Globe, CheckCircle2, Mountain, Lightbulb, TrendingUp, ArrowUpRight, Layers, Building2, Box, ArrowRightCircle, LayoutGrid, List, MessageSquare } from 'lucide-react';
+import { Tag, X, ChevronRight, Calendar, User, Users, Globe, CheckCircle2, Mountain, Lightbulb, TrendingUp, ArrowUpRight, Layers, Building2, Box, ArrowRightCircle, LayoutGrid, List, MessageSquare, Loader2 } from 'lucide-react';
 import { Project } from '../types';
+
+const LazyImage: React.FC<{ src: string; alt: string; className?: string }> = ({ src, alt, className }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [error, setError] = useState(false);
+  const imgRef = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    if (imgRef.current?.complete) {
+      setIsLoaded(true);
+    }
+  }, []);
+
+  return (
+    <div className={`relative overflow-hidden bg-accent/20 ${className}`}>
+      {!isLoaded && !error && (
+        <div className="absolute inset-0 flex items-center justify-center animate-pulse bg-accent/10">
+           <Box className="w-6 h-6 text-muted-foreground/10" />
+        </div>
+      )}
+      <img
+        ref={imgRef}
+        src={src}
+        alt={alt}
+        loading="lazy"
+        onLoad={() => setIsLoaded(true)}
+        onError={() => setError(true)}
+        referrerPolicy="no-referrer"
+        className={`w-full h-full object-cover transition-all duration-700 ${isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-105'}`}
+      />
+    </div>
+  );
+};
 
 const projectsData: Project[] = [
   {
@@ -371,14 +403,13 @@ const TimelineItem: React.FC<{ project: Project; index: number; setSelectedProje
             onClick={() => setSelectedProject(project)}
          >
             {/* Thumbnail Image */}
-            <div className="w-full sm:w-32 h-32 sm:h-auto flex-shrink-0 relative overflow-hidden">
-                <img 
+            <div className="w-full sm:w-32 h-32 sm:h-auto flex-shrink-0 relative">
+                <LazyImage 
                     src={project.image} 
                     alt={project.title} 
-                    referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    className="w-full h-full"
                 />
-                <div className="absolute inset-0 bg-blue-900/10 group-hover:bg-transparent transition-colors" />
+                <div className="absolute inset-0 bg-blue-900/10 group-hover:bg-transparent transition-colors pointer-events-none" />
             </div>
 
             {/* Content */}
@@ -496,11 +527,10 @@ const Projects: React.FC = () => {
                   className="h-56 overflow-hidden relative cursor-pointer" 
                   onClick={() => setSelectedProject(project)}
                 >
-                  <img 
+                  <LazyImage 
                     src={project.image} 
                     alt={project.title} 
-                    referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    className="w-full h-full"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
                   <div className="absolute top-4 right-4 bg-background px-3.5 py-1.5 rounded-full text-[10px] font-black text-primary shadow-md tracking-widest uppercase">
@@ -573,7 +603,11 @@ const Projects: React.FC = () => {
           
           <div className="relative bg-card md:rounded-2xl w-full max-w-5xl h-full md:max-h-[90vh] overflow-y-auto shadow-2xl flex flex-col animate-[fadeIn_0.3s_ease-out]">
             <div className="relative h-96 w-full flex-shrink-0">
-               <img src={selectedProject.image} alt={selectedProject.title} referrerPolicy="no-referrer" className="w-full h-full object-cover" />
+               <LazyImage 
+                 src={selectedProject.image} 
+                 alt={selectedProject.title} 
+                 className="w-full h-full"
+               />
                <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent" />
                
                <button 
