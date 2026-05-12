@@ -112,6 +112,13 @@ const PortfolioAI: React.FC = () => {
     }
   };
 
+  const quickPrompts = [
+    "Tell me about Abhijeet's AI projects",
+    "What is his SaaS scaling impact?",
+    "Show me his core tech stack",
+    "How does he handle Agile delivery?"
+  ];
+
   return (
     <>
       {isOpen && (
@@ -195,6 +202,23 @@ const PortfolioAI: React.FC = () => {
                   <div className="w-1.5 h-1.5 bg-primary rounded-full animate-[bounce_1s_infinite_200ms]"></div>
                   <div className="w-1.5 h-1.5 bg-primary rounded-full animate-[bounce_1s_infinite_400ms]"></div>
                 </div>
+              </div>
+            </div>
+          )}
+
+          {!isLoading && messages.length === 1 && (
+            <div className="pt-4 space-y-3 animate-[fadeIn_0.5s_ease-out_0.2s]">
+              <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground/60 mb-2">Suggested Commands:</p>
+              <div className="flex flex-wrap gap-2">
+                {quickPrompts.map((prompt, i) => (
+                  <button
+                    key={i}
+                    onClick={() => handleSend(prompt)}
+                    className="text-left px-4 py-3 bg-accent/50 hover:bg-primary/10 border border-border rounded-xl text-xs font-semibold text-foreground transition-all hover:border-primary/30 active:scale-95"
+                  >
+                    {prompt}
+                  </button>
+                ))}
               </div>
             </div>
           )}

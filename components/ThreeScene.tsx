@@ -4,61 +4,96 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Points, PointMaterial, Float, Stars, PerspectiveCamera } from '@react-three/drei';
 import * as THREE from 'three';
 
-const Rocket = () => {
-  const rocketRef = useRef<THREE.Group>(null!);
+const ConnectionLines = ({ nodes }: { nodes: any[] }) => {
+  const lineRef = useRef<THREE.LineSegments>(null!);
+  
+  const geometry = useMemo(() => {
+    const points: THREE.Vector3[] = [];
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        if (new THREE.Vector3(...nodes[i].position).distanceTo(new THREE.Vector3(...nodes[j].position)) < 8) {
+          points.push(new THREE.Vector3(...nodes[i].position));
+          points.push(new THREE.Vector3(...nodes[j].position));
+        }
+      }
+    }
+    return new THREE.BufferGeometry().setFromPoints(points);
+  }, [nodes]);
+
+  return (
+    <lineSegments ref={lineRef} geometry={geometry}>
+      <lineBasicMaterial color="#3b82f6" transparent opacity={0.15} />
+    </lineSegments>
+  );
+};
+
+const AbstractSystem = () => {
+  const groupRef = useRef<THREE.Group>(null!);
+
+  const nodes = useMemo(() => {
+    return Array.from({ length: 15 }).map((_, i) => ({
+      position: [
+        (Math.random() - 0.5) * 20,
+        (Math.random() - 0.5) * 20,
+        (Math.random() - 1.5) * 15
+      ] as [number, number, number],
+      rotation: [Math.random() * Math.PI, Math.random() * Math.PI, 0] as [number, number, number],
+      scale: 0.3 + Math.random() * 1.2,
+      speed: 0.1 + Math.random() * 0.4
+    }));
+  }, []);
 
   useFrame((state) => {
     const time = state.clock.getElapsedTime();
-    
-    // Smooth Y-axis bobbing with a secondary subtle wave logic
-    rocketRef.current.position.y = -2 + Math.sin(time * 0.7) * 0.8 + Math.cos(time * 1.2) * 0.2;
-    
-    // Continuous rotation on Y-axis
-    rocketRef.current.rotation.y = time * 0.4;
-    
-    // Subtle tilt/swagger to make it feel less static
-    rocketRef.current.rotation.x = Math.sin(time * 0.5) * 0.1;
-    rocketRef.current.rotation.z = Math.cos(time * 0.5) * 0.1;
+    groupRef.current.rotation.y = time * 0.03;
+    groupRef.current.position.y = Math.sin(time * 0.2) * 0.4;
   });
 
   return (
-    <group ref={rocketRef} position={[0, -3, 10]} scale={1.6}>
-      {/* Nose Cone */}
-      <mesh position={[0, 4, 0]}>
-        <coneGeometry args={[1, 2, 32]} />
-        <meshStandardMaterial color="#ef4444" roughness={0.3} metalness={0.8} />
-      </mesh>
-      
-      {/* Body */}
-      <mesh position={[0, 1.5, 0]}>
-        <cylinderGeometry args={[1, 1, 3, 32]} />
-        <meshStandardMaterial color="#f8fafc" roughness={0.1} metalness={0.5} />
-      </mesh>
-
-      {/* Window / Porthole */}
-      <mesh position={[0, 2.2, 0.9]} rotation={[Math.PI / 2, 0, 0]}>
-        <cylinderGeometry args={[0.3, 0.3, 0.2, 32]} />
-        <meshStandardMaterial color="#3b82f6" emissive="#3b82f6" emissiveIntensity={1} />
-      </mesh>
-      
-      {/* Fins */}
-      {[0, Math.PI * (2/3), Math.PI * (4/3)].map((rotation, i) => (
-        <group key={i} rotation={[0, rotation, 0]}>
-          <mesh position={[1.1, 0, 0]} rotation={[0, 0, -0.1]}>
-            <boxGeometry args={[0.1, 2, 1]} />
-            <meshStandardMaterial color="#ef4444" roughness={0.3} metalness={0.8} />
+    <group ref={groupRef} position={[0, 0, 0]}>
+      <ConnectionLines nodes={nodes} />
+      {nodes.map((node, i) => (
+        <Float
+          key={i}
+          speed={node.speed}
+          rotationIntensity={1}
+          floatIntensity={1}
+          position={node.position}
+        >
+          <mesh rotation={node.rotation} scale={node.scale}>
+            <boxGeometry args={[1, 1, 1]} />
+            <meshPhysicalMaterial
+              color="#3b82f6"
+              metalness={0.9}
+              roughness={0.1}
+              transmission={0.4}
+              thickness={1}
+              transparent
+              opacity={0.6}
+            />
           </mesh>
-        </group>
+          
+          {/* Wireframe overlay for technical feel */}
+          <mesh rotation={node.rotation} scale={node.scale * 1.05}>
+            <boxGeometry args={[1, 1, 1]} />
+            <meshBasicMaterial color="#60a5fa" wireframe transparent opacity={0.1} />
+          </mesh>
+        </Float>
       ))}
 
-      {/* Engine */}
-      <mesh position={[0, -0.2, 0]}>
-        <cylinderGeometry args={[0.7, 0.9, 0.6, 32]} />
-        <meshStandardMaterial color="#334155" metalness={1} roughness={0.2} />
-      </mesh>
-
-      {/* Internal Light for the rocket / Engine Glow */}
-      <pointLight position={[0, -1.5, 0]} intensity={5} color="#f59e0b" distance={8} />
+      {/* Central "Core" element */}
+      <Float speed={2} rotationIntensity={2} floatIntensity={1}>
+        <mesh scale={2.5}>
+          <octahedronGeometry />
+          <meshPhysicalMaterial
+            color="#6366f1"
+            emissive="#4338ca"
+            emissiveIntensity={0.5}
+            metalness={0.8}
+            roughness={0.2}
+          />
+        </mesh>
+      </Float>
     </group>
   );
 };
@@ -119,7 +154,7 @@ const ThreeScene: React.FC<ThreeBackgroundProps> = ({ scrollY, theme }) => {
         {isDark && <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} />}
         {!isDark && <Stars radius={100} depth={50} count={1000} factor={2} saturation={0} fade speed={0.5} />}
         
-        <Rocket />
+        <AbstractSystem />
         <CameraRig scrollY={scrollY} />
         <MouseLight />
         

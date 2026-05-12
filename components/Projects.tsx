@@ -520,9 +520,9 @@ const Projects: React.FC = () => {
         </div>
 
         {viewMode === 'grid' ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 perspective-1000">
             {projectsData.map((project) => (
-              <div key={project.id} className="project-card bg-card rounded-[2.5rem] overflow-hidden border border-border shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col h-full transform hover:-translate-y-2 group">
+              <div key={project.id} className="project-card bg-card rounded-[2.5rem] overflow-hidden border border-border shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col h-full transform group card-3d preserve-3d">
                 <div 
                   className="h-56 overflow-hidden relative cursor-pointer" 
                   onClick={() => setSelectedProject(project)}

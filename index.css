@@ -108,8 +108,8 @@
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(5deg); }
 }
 
 .animate-float {
@@ -137,6 +137,24 @@
 
 .glass-dark {
   @apply bg-slate-900/80 backdrop-blur-xl border border-white/5;
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.card-3d {
+  @apply transition-all duration-500 ease-out;
+  transform: translateZ(0);
+}
+
+.card-3d:hover {
+  transform: translateZ(20px) rotateX(2deg) rotateY(2deg);
+  @apply shadow-2xl shadow-primary/20;
 }
 
 .no-scrollbar::-webkit-scrollbar {

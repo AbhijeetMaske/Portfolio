@@ -54,23 +54,23 @@ const Skills: React.FC = () => {
 
       <div className="container mx-auto px-4 relative">
         <div className="text-center mb-16">
-          <h2 className="text-3xl lg:text-5xl font-black text-foreground mb-6 uppercase tracking-tight">Technical Skills</h2>
+          <h2 className="text-3xl lg:text-5xl font-black text-foreground mb-6 uppercase tracking-tight">Technical Skill</h2>
           <div className="w-24 h-2 bg-primary mx-auto rounded-full mb-8" aria-label="Section Divider"></div>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg lg:text-xl font-medium">
             A comprehensive stack of strategic, tactical, and technological capabilities refined through 9+ years of leadership.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 perspective-1000">
           {skillsData.map((category, index) => {
             const Icon = category.icon;
             return (
               <div 
                 key={index} 
-                className={`group bg-card/90 rounded-[2.5rem] p-8 border border-border shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-2 backdrop-blur-xl flex flex-col ${category.borderColor}`}
+                className={`group bg-card/90 rounded-[2.5rem] p-8 border border-border shadow-sm hover:shadow-xl transition-all duration-500 backdrop-blur-xl flex flex-col ${category.borderColor} card-3d preserve-3d`}
               >
-                <div className="flex items-start justify-between mb-8">
-                  <div className={`w-16 h-16 rounded-2xl ${category.bgColor} flex items-center justify-center group-hover:rotate-12 transition-transform duration-500 shadow-sm`}>
+                <div className="flex items-start justify-between mb-8 preserve-3d">
+                  <div className={`w-16 h-16 rounded-2xl ${category.bgColor} flex items-center justify-center group-hover:rotate-12 transition-transform duration-500 shadow-sm`} style={{ transform: 'translateZ(30px)' }}>
                     <Icon className={`w-8 h-8 ${category.color}`} aria-hidden="true" />
                   </div>
                 </div>

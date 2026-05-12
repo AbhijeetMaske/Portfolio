@@ -4,7 +4,7 @@ import { Menu, X, Command, Sun, Moon } from 'lucide-react';
 
 const navItems = [
   { label: 'About', href: '#about', id: 'about' },
-  { label: 'Skills', href: '#skills', id: 'skills' },
+  { label: 'Skill', href: '#skills', id: 'skills' },
   { label: 'Experience', href: '#experience', id: 'experience' },
   { label: 'Projects', href: '#projects', id: 'projects' },
   { label: 'Contact', href: '#contact', id: 'contact' },
@@ -22,29 +22,49 @@ const Header: React.FC<HeaderProps> = ({ theme, toggleTheme }) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Reading Progress
       const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
       const progress = (window.scrollY / totalScroll) * 100;
       setScrollProgress(progress);
+    };
 
-      // Scroll Spy
+    // Use IntersectionObserver for more accurate scroll spy
+    const observerOptions = {
+      root: null,
+      rootMargin: '-20% 0px -70% 0px',
+      threshold: 0
+    };
+
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+    
+    navItems.forEach(item => {
+      const element = document.getElementById(item.id);
+      if (element) observer.observe(element);
+    });
+
+    // Special case for footer/bottom of page to select 'contact'
+    const handleBottomReach = () => {
       if ((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 50) {
         setActiveSection('contact');
-        return;
-      }
-
-      const scrollPosition = window.scrollY + 120;
-      for (const item of navItems) {
-        const element = document.getElementById(item.id);
-        if (element && element.offsetTop <= scrollPosition && (element.offsetTop + element.offsetHeight) > scrollPosition) {
-          setActiveSection(item.id);
-        }
       }
     };
 
     window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleBottomReach);
     handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('scroll', handleBottomReach);
+      observer.disconnect();
+    };
   }, []);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {

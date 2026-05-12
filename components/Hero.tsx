@@ -78,8 +78,9 @@ const Hero: React.FC = () => {
       </div>
 
       {/* Decorative localized depth markers */}
-      <div className="absolute top-1/4 left-10 w-24 h-24 border border-primary/20 rounded-full animate-pulse pointer-events-none"></div>
-      <div className="absolute bottom-1/4 right-10 w-40 h-40 border border-primary/10 rounded-full animate-pulse delay-500 pointer-events-none"></div>
+      <div className="absolute top-1/4 left-[5%] w-32 h-32 bg-primary/5 rounded-3xl border border-primary/10 rotate-12 animate-float blur-[1px] pointer-events-none hidden lg:block"></div>
+      <div className="absolute top-1/3 right-[10%] w-24 h-24 bg-indigo-500/5 rounded-full border border-indigo-500/10 -rotate-12 animate-float delay-700 blur-[1px] pointer-events-none hidden lg:block"></div>
+      <div className="absolute bottom-1/4 left-[15%] w-16 h-16 bg-emerald-500/5 rounded-xl border border-emerald-500/10 rotate-45 animate-float delay-1000 blur-[1.5px] pointer-events-none"></div>
     </section>
   );
 };

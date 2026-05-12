@@ -44,15 +44,15 @@ const Methodology: React.FC = () => {
           </p>
         </div>
 
-        <div className="relative grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="relative grid grid-cols-1 md:grid-cols-4 gap-8 perspective-1000">
           {/* Connector Line (Desktop) */}
-          <div className="hidden md:block absolute top-12 left-[12%] right-[12%] h-0.5 bg-border z-0" aria-hidden="true"></div>
+          <div className="hidden md:block absolute top-12 left-[12%] right-[12%] h-0.5 bg-gradient-to-r from-transparent via-border to-transparent z-0" aria-hidden="true"></div>
 
           {steps.map((step, index) => {
             const Icon = step.icon;
             return (
-              <div key={step.id} className="relative z-10 flex flex-col items-center text-center group">
-                <div className={`w-24 h-24 ${step.color} rounded-full flex items-center justify-center mb-6 shadow-sm border-4 border-background group-hover:scale-110 transition-transform duration-300`}>
+              <div key={step.id} className="relative z-10 flex flex-col items-center text-center group card-3d preserve-3d py-4">
+                <div className={`w-24 h-24 ${step.color} rounded-full flex items-center justify-center mb-6 shadow-sm border-4 border-background group-hover:scale-110 transition-transform duration-300 preserve-3d`} style={{ transform: 'translateZ(20px)' }}>
                   <Icon className="w-10 h-10" aria-hidden="true" />
                 </div>
                 <h3 className="text-xl font-bold text-foreground mb-3">{step.title}</h3>
