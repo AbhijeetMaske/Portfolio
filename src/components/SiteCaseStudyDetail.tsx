@@ -39,7 +39,7 @@ const LazyImage: React.FC<{ src: string; alt: string; className?: string; priori
   );
 };
 
-const CaseStudyDetail: React.FC = () => {
+const SiteCaseStudyDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const project = projectsData.find(p => p.id === Number(id));
@@ -369,4 +369,4 @@ const CaseStudyDetail: React.FC = () => {
   );
 };
 
-export default CaseStudyDetail;
+export default SiteCaseStudyDetail;

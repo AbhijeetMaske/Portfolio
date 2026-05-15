@@ -10,7 +10,7 @@ import {
 import { Link } from 'react-router-dom';
 import { projectsData } from '@/data/projects';
 
-const Resume: React.FC = () => {
+const SiteResume: React.FC = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     // Update SEO meta tags
@@ -266,4 +266,4 @@ const Resume: React.FC = () => {
   );
 };
 
-export default Resume;
+export default SiteResume;

@@ -15,11 +15,11 @@ import SiteTestimonials from '@/components/SiteTestimonials';
 import SiteContact from '@/components/SiteContact';
 import SiteFooter from '@/components/SiteFooter';
 import AdminModal from '@/components/Admin/AdminModal';
-import ScrollToTop from '@/components/ScrollToTop';
-import PortfolioAI from '@/components/PortfolioAI';
-import ThreeScene from '@/components/ThreeScene';
-import CaseStudyDetail from '@/components/CaseStudyDetail';
-import Resume from '@/components/Resume';
+import SiteScrollToTop from '@/components/SiteScrollToTop';
+import SitePortfolioAI from '@/components/SitePortfolioAI';
+import SiteThreeScene from '@/components/SiteThreeScene';
+import SiteCaseStudyDetail from '@/components/SiteCaseStudyDetail';
+import SiteResume from '@/components/SiteResume';
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
@@ -145,14 +145,14 @@ const AppContent: React.FC = () => {
 
   return (
     <div className="relative min-h-screen bg-transparent text-foreground font-sans selection:bg-primary selection:text-primary-foreground transition-colors duration-500">
-      <ThreeScene scrollY={scrollY} theme={theme} />
+      <SiteThreeScene scrollY={scrollY} theme={theme} />
 
       <SiteHeader theme={theme} toggleTheme={toggleTheme} />
       
       <Routes>
         <Route path="/" element={<Home mainRef={mainRef} />} />
-        <Route path="/project/:id" element={<CaseStudyDetail />} />
-        <Route path="/resume" element={<Resume />} />
+        <Route path="/project/:id" element={<SiteCaseStudyDetail />} />
+        <Route path="/resume" element={<SiteResume />} />
       </Routes>
 
       <SiteFooter 
@@ -166,8 +166,8 @@ const AppContent: React.FC = () => {
         onClose={() => setIsAdminOpen(false)} 
       />
 
-      <PortfolioAI />
-      <ScrollToTop />
+      <SitePortfolioAI />
+      <SiteScrollToTop />
     </div>
   );
 };
