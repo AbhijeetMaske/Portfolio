@@ -1,8 +1,8 @@
 
 import React, { useState } from 'react';
 import { X, ShieldCheck, LogOut, Terminal, Activity, Monitor } from 'lucide-react';
-import Login from './Login';
-import Dashboard from './Dashboard';
+import Login from '@/components/Admin/Login.tsx';
+import Dashboard from '@/components/Admin/Dashboard.tsx';
 
 interface AdminModalProps {
   isOpen: boolean;

@@ -4,22 +4,22 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-import Header from './components/Header';
-import Hero from './components/Hero';
-import ImpactStats from './components/ImpactStats';
-import Skills from './components/Skills';
-import Methodology from './components/Methodology';
-import Experience from './components/Experience';
-import Projects from './components/Projects';
-import Testimonials from './components/Testimonials';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
-import AdminModal from './components/Admin/AdminModal';
-import ScrollToTop from './components/ScrollToTop';
-import PortfolioAI from './components/PortfolioAI';
-import ThreeScene from './components/ThreeScene';
-import CaseStudyDetail from './components/CaseStudyDetail';
-import Resume from './components/Resume';
+import Header from '@/components/Header.tsx';
+import Hero from '@/components/Hero.tsx';
+import ImpactStats from '@/components/ImpactStats.tsx';
+import Skills from '@/components/Skills.tsx';
+import Methodology from '@/components/Methodology.tsx';
+import Experience from '@/components/Experience.tsx';
+import Projects from '@/components/Projects.tsx';
+import Testimonials from '@/components/Testimonials.tsx';
+import Contact from '@/components/Contact.tsx';
+import Footer from '@/components/Footer.tsx';
+import AdminModal from '@/components/Admin/AdminModal.tsx';
+import ScrollToTop from '@/components/ScrollToTop.tsx';
+import PortfolioAI from '@/components/PortfolioAI.tsx';
+import ThreeScene from '@/components/ThreeScene.tsx';
+import CaseStudyDetail from '@/components/CaseStudyDetail.tsx';
+import Resume from '@/components/Resume.tsx';
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
