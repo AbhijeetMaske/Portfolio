@@ -3,8 +3,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'motion/react';
 import { useNavigate } from 'react-router-dom';
 import { ChevronRight, User, Building2, LayoutGrid, List, MessageSquare, Box } from 'lucide-react';
-import { Project } from '../types.ts';
-import { projectsData } from '../data/projects.ts';
+import { Project } from '../types';
+import { projectsData } from '../data/projects';
 
 const LazyImage: React.FC<{ src: string; alt: string; className?: string; priority?: boolean }> = ({ src, alt, className, priority }) => {
   const [isLoaded, setIsLoaded] = useState(false);
