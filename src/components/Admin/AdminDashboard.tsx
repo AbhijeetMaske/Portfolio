@@ -34,7 +34,7 @@ interface DashboardProps {
   onLogout: () => void;
 }
 
-const Dashboard: React.FC<DashboardProps> = ({ onLogout }) => {
+const AdminDashboard: React.FC<DashboardProps> = ({ onLogout }) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [interactions, setInteractions] = useState<Interaction[]>([]);
   const [trafficHistory, setTrafficHistory] = useState<TrafficLog[]>([]);
@@ -400,4 +400,4 @@ const Dashboard: React.FC<DashboardProps> = ({ onLogout }) => {
   );
 };
 
-export default Dashboard;
+export default AdminDashboard;

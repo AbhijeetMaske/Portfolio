@@ -1,15 +1,15 @@
 
 import React, { useState } from 'react';
 import { X, ShieldCheck, LogOut, Terminal, Activity, Monitor } from 'lucide-react';
-import Login from '@/components/Admin/Login';
-import Dashboard from '@/components/Admin/Dashboard';
+import AdminLogin from '@/components/Admin/AdminLogin';
+import AdminDashboard from '@/components/Admin/AdminDashboard';
 
 interface AdminModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-const AdminModal: React.FC<AdminModalProps> = ({ isOpen, onClose }) => {
+const SiteAdminModal: React.FC<AdminModalProps> = ({ isOpen, onClose }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const handleLogin = (success: boolean) => {
@@ -69,13 +69,13 @@ const AdminModal: React.FC<AdminModalProps> = ({ isOpen, onClose }) => {
       {/* Main Interface Router */}
       <div className="flex-1 overflow-hidden relative">
         {!isAuthenticated ? (
-          <Login onLogin={handleLogin} />
+          <AdminLogin onLogin={handleLogin} />
         ) : (
-          <Dashboard onLogout={handleLogout} />
+          <AdminDashboard onLogout={handleLogout} />
         )}
       </div>
     </div>
   );
 };
 
-export default AdminModal;
+export default SiteAdminModal;

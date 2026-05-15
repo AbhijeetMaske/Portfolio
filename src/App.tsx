@@ -14,7 +14,7 @@ import SiteProjects from '@/components/SiteProjects';
 import SiteTestimonials from '@/components/SiteTestimonials';
 import SiteContact from '@/components/SiteContact';
 import SiteFooter from '@/components/SiteFooter';
-import AdminModal from '@/components/Admin/AdminModal';
+import SiteAdminModal from '@/components/Admin/SiteAdminModal';
 import SiteScrollToTop from '@/components/SiteScrollToTop';
 import SitePortfolioAI from '@/components/SitePortfolioAI';
 import SiteThreeScene from '@/components/SiteThreeScene';
@@ -161,7 +161,7 @@ const AppContent: React.FC = () => {
         liveUsers={liveUsers}
       />
       
-      <AdminModal 
+      <SiteAdminModal 
         isOpen={isAdminOpen} 
         onClose={() => setIsAdminOpen(false)} 
       />
