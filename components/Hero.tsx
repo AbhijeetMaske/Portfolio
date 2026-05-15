@@ -47,9 +47,9 @@ const Hero: React.FC = () => {
           </div>
           
           <h1 className="text-6xl lg:text-8xl font-black text-foreground leading-[1.05] mb-10 tracking-tight drop-shadow-sm">
-            Senior <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-indigo-400">Technical Product</span> <br />
-            Manager.
+            Technical <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-indigo-400">Product</span> <br />
+            Owner.
           </h1>
           
           <p className="text-xl lg:text-2xl text-muted-foreground mb-12 max-w-2xl leading-relaxed font-medium transition-colors">

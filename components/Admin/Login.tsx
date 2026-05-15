@@ -19,7 +19,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
 
     // Simulate API check
     setTimeout(() => {
-      if (username === 'admin' && password === 'admin123') {
+      if (username === 'Abhijeet.maske@yahoo.com' && password === 'Ramsavita@788') {
         onLogin(true);
       } else {
         setError('Invalid administrator credentials.');
@@ -42,18 +42,18 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
-              <label className="block text-xs font-black text-muted-foreground uppercase tracking-[0.2em] ml-1">Username</label>
+              <label className="block text-xs font-black text-muted-foreground uppercase tracking-[0.2em] ml-1">Email Address</label>
               <div className="relative group">
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                   <User className="h-5 w-5 text-muted-foreground group-focus-within:text-primary transition-colors" />
                 </div>
                 <input
-                  type="text"
+                  type="email"
                   autoFocus
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
-                  className="block w-full pl-12 pr-4 py-4 bg-accent border border-border rounded-2xl focus:ring-4 focus:ring-primary/10 focus:border-primary focus:bg-card outline-none transition-all font-semibold text-foreground uppercase tracking-wider"
-                  placeholder="admin"
+                  className="block w-full pl-12 pr-4 py-4 bg-accent border border-border rounded-2xl focus:ring-4 focus:ring-primary/10 focus:border-primary focus:bg-card outline-none transition-all font-semibold text-foreground tracking-wider"
+                  placeholder="admin@example.com"
                 />
               </div>
             </div>
