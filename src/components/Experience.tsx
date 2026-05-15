@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Calendar, MapPin, Building2, CheckCircle2, Award, BriefcaseBusiness, Sparkles, Clock, Globe } from 'lucide-react';
-import { ExperienceItem } from '@/types.ts';
+import { ExperienceItem } from '../types';
 
 const experienceData: ExperienceItem[] = [
   {

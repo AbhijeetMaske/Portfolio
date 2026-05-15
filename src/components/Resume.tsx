@@ -8,7 +8,7 @@ import {
   ExternalLink, ChevronRight, Layout
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { projectsData } from '@/data/projects.ts';
+import { projectsData } from '../data/projects';
 
 const Resume: React.FC = () => {
   useEffect(() => {
