@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-import Header from '@/components/Header';
+import SiteHeader from '@/components/SiteHeader';
 import Hero from '@/components/Hero';
 import ImpactStats from '@/components/ImpactStats';
 import Skills from '@/components/Skills';
@@ -147,7 +147,7 @@ const AppContent: React.FC = () => {
     <div className="relative min-h-screen bg-transparent text-foreground font-sans selection:bg-primary selection:text-primary-foreground transition-colors duration-500">
       <ThreeScene scrollY={scrollY} theme={theme} />
 
-      <Header theme={theme} toggleTheme={toggleTheme} />
+      <SiteHeader theme={theme} toggleTheme={toggleTheme} />
       
       <Routes>
         <Route path="/" element={<Home mainRef={mainRef} />} />
