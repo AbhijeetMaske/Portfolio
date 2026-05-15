@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState, useRef } from 'react';
 import { Zap, UsersRound, Rocket, History } from 'lucide-react';
-import { calculateDuration } from './Experience';
+import { calculateDuration } from '@/components/Experience';
 
 const ImpactStats: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
