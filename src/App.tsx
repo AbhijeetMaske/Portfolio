@@ -5,7 +5,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import SiteHeader from '@/components/SiteHeader';
-import Hero from '@/components/Hero';
+import SiteHero from '@/components/SiteHero';
 import ImpactStats from '@/components/ImpactStats';
 import Skills from '@/components/Skills';
 import Methodology from '@/components/Methodology';
@@ -40,7 +40,7 @@ const Home: React.FC<{ mainRef: React.RefObject<HTMLDivElement | null> }> = ({ m
 
   return (
     <div ref={mainRef} className="relative z-10 w-full overflow-hidden">
-      <Hero />
+      <SiteHero />
       <ImpactStats />
       <Skills />
       <div className="backdrop-blur-[2px] bg-accent/30">
