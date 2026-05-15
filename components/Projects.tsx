@@ -406,7 +406,7 @@ const TimelineItem: React.FC<{ project: Project; index: number; setSelectedProje
             <div className="w-full sm:w-32 h-32 sm:h-auto flex-shrink-0 relative">
                 <LazyImage 
                     src={project.image} 
-                    alt={project.title} 
+                    alt={`Technical Product Management Case Study: ${project.title}`} 
                     className="w-full h-full"
                 />
                 <div className="absolute inset-0 bg-blue-900/10 group-hover:bg-transparent transition-colors pointer-events-none" />
@@ -529,7 +529,7 @@ const Projects: React.FC = () => {
                 >
                   <LazyImage 
                     src={project.image} 
-                    alt={project.title} 
+                    alt={`Abhijeet Maske Project: ${project.title} - SaaS platform modernization and scaling.`} 
                     className="w-full h-full"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
@@ -605,7 +605,7 @@ const Projects: React.FC = () => {
             <div className="relative h-96 w-full flex-shrink-0">
                <LazyImage 
                  src={selectedProject.image} 
-                 alt={selectedProject.title} 
+                 alt={`Detailed Case Study Preview: ${selectedProject.title} by Abhijeet Maske`} 
                  className="w-full h-full"
                />
                <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/40 to-transparent" />

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://abhijeetmaske.com/sitemap.xml
