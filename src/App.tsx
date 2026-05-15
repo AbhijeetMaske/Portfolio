@@ -6,14 +6,14 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import SiteHeader from '@/components/SiteHeader';
 import SiteHero from '@/components/SiteHero';
-import ImpactStats from '@/components/ImpactStats';
-import Skills from '@/components/Skills';
-import Methodology from '@/components/Methodology';
-import Experience from '@/components/Experience';
-import Projects from '@/components/Projects';
-import Testimonials from '@/components/Testimonials';
-import Contact from '@/components/Contact';
-import Footer from '@/components/Footer';
+import SiteImpactStats from '@/components/SiteImpactStats';
+import SiteSkills from '@/components/SiteSkills';
+import SiteMethodology from '@/components/SiteMethodology';
+import SiteExperience from '@/components/SiteExperience';
+import SiteProjects from '@/components/SiteProjects';
+import SiteTestimonials from '@/components/SiteTestimonials';
+import SiteContact from '@/components/SiteContact';
+import SiteFooter from '@/components/SiteFooter';
 import AdminModal from '@/components/Admin/AdminModal';
 import ScrollToTop from '@/components/ScrollToTop';
 import PortfolioAI from '@/components/PortfolioAI';
@@ -41,14 +41,14 @@ const Home: React.FC<{ mainRef: React.RefObject<HTMLDivElement | null> }> = ({ m
   return (
     <div ref={mainRef} className="relative z-10 w-full overflow-hidden">
       <SiteHero />
-      <ImpactStats />
-      <Skills />
+      <SiteImpactStats />
+      <SiteSkills />
       <div className="backdrop-blur-[2px] bg-accent/30">
-        <Methodology />
-        <Experience />
-        <Projects />
-        <Testimonials />
-        <Contact />
+        <SiteMethodology />
+        <SiteExperience />
+        <SiteProjects />
+        <SiteTestimonials />
+        <SiteContact />
       </div>
     </div>
   );
@@ -155,7 +155,7 @@ const AppContent: React.FC = () => {
         <Route path="/resume" element={<Resume />} />
       </Routes>
 
-      <Footer 
+      <SiteFooter 
         onOpenAdmin={() => setIsAdminOpen(true)} 
         totalVisits={totalVisits} 
         liveUsers={liveUsers}

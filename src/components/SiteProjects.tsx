@@ -160,7 +160,7 @@ const TimelineItem: React.FC<{ project: Project; index: number; onSelect: (id: n
   );
 };
 
-const Projects: React.FC = () => {
+const SiteProjects: React.FC = () => {
   const navigate = useNavigate();
   const [viewMode, setViewMode] = useState<'grid' | 'timeline'>('grid');
 
@@ -301,4 +301,4 @@ const Projects: React.FC = () => {
   );
 };
 
-export default Projects;
+export default SiteProjects;

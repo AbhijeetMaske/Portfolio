@@ -1,9 +1,9 @@
 
 import React, { useEffect, useState, useRef } from 'react';
 import { Zap, UsersRound, Rocket, History } from 'lucide-react';
-import { calculateDuration } from '@/components/Experience';
+import { calculateDuration } from '@/components/SiteExperience';
 
-const ImpactStats: React.FC = () => {
+const SiteImpactStats: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [totalExp, setTotalExp] = useState({ years: 0, months: 0, days: 0 });
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -151,4 +151,4 @@ const Counter: React.FC<{ stat: any, isVisible: boolean }> = ({ stat, isVisible 
   );
 };
 
-export default ImpactStats;
+export default SiteImpactStats;

@@ -65,7 +65,7 @@ export const calculateDuration = (startStr: string, endStr?: string) => {
   return { years, months, days };
 };
 
-const Experience: React.FC = () => {
+const SiteExperience: React.FC = () => {
   const [now, setNow] = useState(new Date());
 
   // Update "Present" experience in real-time every 24 hours (or just on mount)
@@ -260,4 +260,4 @@ const Experience: React.FC = () => {
   );
 };
 
-export default Experience;
+export default SiteExperience;
