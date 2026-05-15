@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { Tag, X, ChevronRight, Calendar, User, Users, Globe, CheckCircle2, Mountain, Lightbulb, TrendingUp, ArrowUpRight, Layers, Building2, Box, ArrowRightCircle, LayoutGrid, List, MessageSquare, Loader2 } from 'lucide-react';
 import { Project } from '../types';
 
@@ -29,7 +30,7 @@ const LazyImage: React.FC<{ src: string; alt: string; className?: string }> = ({
         onLoad={() => setIsLoaded(true)}
         onError={() => setError(true)}
         referrerPolicy="no-referrer"
-        className={`w-full h-full object-cover transition-all duration-700 ${isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-105'}`}
+        className={`w-full h-full object-cover transition-all duration-1000 ease-out ${isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-110'}`}
       />
     </div>
   );
@@ -368,8 +369,11 @@ const TimelineItem: React.FC<{ project: Project; index: number; setSelectedProje
   }, []);
 
   return (
-    <div 
+    <motion.div 
       ref={elementRef}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
       className={`relative flex flex-col md:flex-row gap-8 items-center transition-opacity duration-500 ${
         index % 2 === 0 ? 'md:flex-row-reverse' : ''
       } ${isFocused ? 'opacity-100' : 'opacity-60 hover:opacity-100'}`}
@@ -396,18 +400,20 @@ const TimelineItem: React.FC<{ project: Project; index: number; setSelectedProje
 
       {/* Content Card */}
       <div className="flex-1 w-full pl-20 md:pl-0">
-         <div 
-            className={`bg-card rounded-[1.75rem] overflow-hidden border shadow-sm transition-all duration-500 cursor-pointer group hover:-translate-y-1 relative flex flex-col sm:flex-row h-full sm:h-auto ${
+         <motion.div 
+            whileHover={{ y: -8, scale: 1.01 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            className={`bg-card rounded-[1.75rem] overflow-hidden border shadow-sm cursor-pointer group relative flex flex-col sm:flex-row h-full sm:h-auto ${
               isFocused ? 'ring-4 ring-primary/10 shadow-2xl border-primary/20' : 'border-border'
             }`}
             onClick={() => setSelectedProject(project)}
          >
             {/* Thumbnail Image */}
-            <div className="w-full sm:w-32 h-32 sm:h-auto flex-shrink-0 relative">
+            <div className="w-full sm:w-32 h-32 sm:h-auto flex-shrink-0 relative overflow-hidden">
                 <LazyImage 
                     src={project.image} 
                     alt={`Technical Product Management Case Study: ${project.title}`} 
-                    className="w-full h-full"
+                    className="w-full h-full group-hover:scale-110 transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-blue-900/10 group-hover:bg-transparent transition-colors pointer-events-none" />
             </div>
@@ -449,9 +455,9 @@ const TimelineItem: React.FC<{ project: Project; index: number; setSelectedProje
                     </span>
                 </div>
             </div>
-          </div>
+          </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
@@ -520,20 +526,34 @@ const Projects: React.FC = () => {
         </div>
 
         {viewMode === 'grid' ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 perspective-1000">
-            {projectsData.map((project) => (
-              <div key={project.id} className="project-card bg-card rounded-[2.5rem] overflow-hidden border border-border shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col h-full transform group card-3d preserve-3d">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-2 py-4">
+            {projectsData.map((project, idx) => (
+              <motion.div 
+                key={project.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1 }}
+                whileHover={{ y: -12, scale: 1.02 }}
+                className="project-card bg-card rounded-[2.5rem] overflow-hidden border border-border shadow-sm hover:shadow-[0_20px_50px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_20px_50px_rgba(0,0,0,0.3)] transition-all duration-500 flex flex-col h-full transform group"
+              >
                 <div 
                   className="h-56 overflow-hidden relative cursor-pointer" 
                   onClick={() => setSelectedProject(project)}
                 >
-                  <LazyImage 
-                    src={project.image} 
-                    alt={`Abhijeet Maske Project: ${project.title} - SaaS platform modernization and scaling.`} 
+                  <motion.div
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ duration: 0.6 }}
                     className="w-full h-full"
-                  />
+                  >
+                    <LazyImage 
+                      src={project.image} 
+                      alt={`Abhijeet Maske Project: ${project.title} - SaaS platform modernization and scaling.`} 
+                      className="w-full h-full"
+                    />
+                  </motion.div>
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
-                  <div className="absolute top-4 right-4 bg-background px-3.5 py-1.5 rounded-full text-[10px] font-black text-primary shadow-md tracking-widest uppercase">
+                  <div className="absolute top-4 right-4 bg-background/90 backdrop-blur-md px-3.5 py-1.5 rounded-full text-[10px] font-black text-primary shadow-md tracking-widest uppercase">
                     {project.category}
                   </div>
                 </div>
@@ -570,7 +590,7 @@ const Projects: React.FC = () => {
                     <ChevronRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                   </button>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         ) : (
