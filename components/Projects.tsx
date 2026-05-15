@@ -6,7 +6,7 @@ import { ChevronRight, User, Building2, LayoutGrid, List, MessageSquare, Box } f
 import { Project } from '../types';
 import { projectsData } from '../data/projects';
 
-const LazyImage: React.FC<{ src: string; alt: string; className?: string }> = ({ src, alt, className }) => {
+const LazyImage: React.FC<{ src: string; alt: string; className?: string; priority?: boolean }> = ({ src, alt, className, priority }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
@@ -28,7 +28,9 @@ const LazyImage: React.FC<{ src: string; alt: string; className?: string }> = ({
         ref={imgRef}
         src={src}
         alt={alt}
-        loading="lazy"
+        loading={priority ? "eager" : "lazy"}
+        fetchPriority={priority ? "high" : "auto"}
+        decoding="async"
         onLoad={() => setIsLoaded(true)}
         onError={() => setError(true)}
         referrerPolicy="no-referrer"

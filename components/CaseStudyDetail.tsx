@@ -5,7 +5,7 @@ import { motion } from 'motion/react';
 import { X, ChevronRight, User, Building2, Globe, TrendingUp, Lightbulb, Layers, Users, Box, CheckCircle2, ArrowUpRight, MessageSquare } from 'lucide-react';
 import { projectsData } from '../data/projects';
 
-const LazyImage: React.FC<{ src: string; alt: string; className?: string }> = ({ src, alt, className }) => {
+const LazyImage: React.FC<{ src: string; alt: string; className?: string; priority?: boolean }> = ({ src, alt, className, priority }) => {
   const [isLoaded, setIsLoaded] = React.useState(false);
   const [error, setError] = React.useState(false);
   const imgRef = React.useRef<HTMLImageElement>(null);
@@ -27,7 +27,9 @@ const LazyImage: React.FC<{ src: string; alt: string; className?: string }> = ({
         ref={imgRef}
         src={src}
         alt={alt}
-        loading="lazy"
+        loading={priority ? "eager" : "lazy"}
+        fetchPriority={priority ? "high" : "auto"}
+        decoding="async"
         onLoad={() => setIsLoaded(true)}
         onError={() => setError(true)}
         referrerPolicy="no-referrer"
@@ -89,6 +91,7 @@ const CaseStudyDetail: React.FC = () => {
                 src={project.image} 
                 alt={`Case Study: ${project.title}`} 
                 className="w-full h-full"
+                priority={true}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
               
