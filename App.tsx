@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -17,16 +18,48 @@ import AdminModal from './components/Admin/AdminModal';
 import ScrollToTop from './components/ScrollToTop';
 import PortfolioAI from './components/PortfolioAI';
 import ThreeScene from './components/ThreeScene';
+import CaseStudyDetail from './components/CaseStudyDetail';
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
 
-const App: React.FC = () => {
+const Home: React.FC<{ mainRef: React.RefObject<HTMLDivElement | null> }> = ({ mainRef }) => {
+  const location = useLocation();
+
+  useEffect(() => {
+    // Check for query params to scroll to specific sections
+    const params = new URLSearchParams(location.search);
+    if (params.get('contact')) {
+      const element = document.getElementById('contact');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, [location]);
+
+  return (
+    <div ref={mainRef} className="relative z-10 w-full overflow-hidden">
+      <Hero />
+      <ImpactStats />
+      <Skills />
+      <div className="backdrop-blur-[2px] bg-accent/30">
+        <Methodology />
+        <Experience />
+        <Projects />
+        <Testimonials />
+        <Contact />
+      </div>
+    </div>
+  );
+};
+
+const AppContent: React.FC = () => {
   const [isAdminOpen, setIsAdminOpen] = useState(false);
   const [totalVisits, setTotalVisits] = useState(0);
   const [liveUsers, setLiveUsers] = useState(0);
   const [scrollY, setScrollY] = useState(0);
   const mainRef = useRef<HTMLDivElement>(null);
+  const location = useLocation();
 
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     if (typeof window !== 'undefined') {
@@ -39,8 +72,6 @@ const App: React.FC = () => {
 
   useEffect(() => {
     const root = window.document.documentElement;
-    // For 3D experience, dark theme often looks better, 
-    // but we support both. We'll enforce some dark properties for the 3D scene background.
     if (theme === 'dark') {
       root.classList.add('dark');
     } else {
@@ -54,7 +85,6 @@ const App: React.FC = () => {
   };
 
   useEffect(() => {
-    // Traffic logic (omitted for brevity in thinking, keeping original)
     const BASE_VISITS = 12482;
     const getStoredReach = () => {
       const stored = localStorage.getItem('portfolio_total_visits');
@@ -78,7 +108,6 @@ const App: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    // Track scroll position for Three.js
     const handleScroll = () => {
       setScrollY(window.scrollY);
     };
@@ -111,27 +140,18 @@ const App: React.FC = () => {
       window.removeEventListener('scroll', handleScroll);
       ScrollTrigger.getAll().forEach(st => st.kill());
     };
-  }, []);
+  }, [location.pathname]); // Re-run when path changes
 
   return (
     <div className="relative min-h-screen bg-transparent text-foreground font-sans selection:bg-primary selection:text-primary-foreground transition-colors duration-500">
-      {/* 3D Background */}
       <ThreeScene scrollY={scrollY} theme={theme} />
 
       <Header theme={theme} toggleTheme={toggleTheme} />
       
-      <div ref={mainRef} className="relative z-10 w-full overflow-hidden">
-        <Hero />
-        <ImpactStats />
-        <Skills />
-        <div className="backdrop-blur-[2px] bg-accent/30">
-           <Methodology />
-           <Experience />
-           <Projects />
-           <Testimonials />
-           <Contact />
-        </div>
-      </div>
+      <Routes>
+        <Route path="/" element={<Home mainRef={mainRef} />} />
+        <Route path="/project/:id" element={<CaseStudyDetail />} />
+      </Routes>
 
       <Footer 
         onOpenAdmin={() => setIsAdminOpen(true)} 
@@ -147,6 +167,14 @@ const App: React.FC = () => {
       <PortfolioAI />
       <ScrollToTop />
     </div>
+  );
+};
+
+const App: React.FC = () => {
+  return (
+    <BrowserRouter>
+      <AppContent />
+    </BrowserRouter>
   );
 };
 

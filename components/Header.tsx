@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Menu, X, Command, Sun, Moon } from 'lucide-react';
 
 const navItems = [
@@ -19,6 +20,8 @@ const Header: React.FC<HeaderProps> = ({ theme, toggleTheme }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('about');
   const [scrollProgress, setScrollProgress] = useState(0);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,6 +29,11 @@ const Header: React.FC<HeaderProps> = ({ theme, toggleTheme }) => {
       const progress = (window.scrollY / totalScroll) * 100;
       setScrollProgress(progress);
     };
+
+    if (location.pathname !== '/') {
+      setActiveSection('');
+      return;
+    }
 
     // Use IntersectionObserver for more accurate scroll spy
     const observerOptions = {
@@ -49,7 +57,6 @@ const Header: React.FC<HeaderProps> = ({ theme, toggleTheme }) => {
       if (element) observer.observe(element);
     });
 
-    // Special case for footer/bottom of page to select 'contact'
     const handleBottomReach = () => {
       if ((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 50) {
         setActiveSection('contact');
@@ -65,13 +72,29 @@ const Header: React.FC<HeaderProps> = ({ theme, toggleTheme }) => {
       window.removeEventListener('scroll', handleBottomReach);
       observer.disconnect();
     };
-  }, []);
+  }, [location.pathname]);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
-    setActiveSection(id);
     setIsOpen(false);
 
+    if (location.pathname !== '/') {
+      navigate(`/#${id}`);
+      // The smooth scroll logic is in Home component or handled by router link with hash
+      // But we can manually scroll after navigation if needed.
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          const offset = 80;
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.scrollY - offset;
+          window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+        }
+      }, 100);
+      return;
+    }
+
+    setActiveSection(id);
     const element = document.getElementById(id);
     if (element) {
       const offset = 80;
@@ -89,11 +112,16 @@ const Header: React.FC<HeaderProps> = ({ theme, toggleTheme }) => {
 
   const scrollToTop = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-    window.history.pushState(null, '', '#');
+    if (location.pathname !== '/') {
+      navigate('/');
+      window.scrollTo(0, 0);
+    } else {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+      window.history.pushState(null, '', '#');
+    }
     setIsOpen(false);
   };
 

@@ -11,8 +11,8 @@ export interface Project {
   title: string;
   category: string;
   description: string;
-  challenge: string;
-  solution: string;
+  challenge?: string;
+  solution?: string;
   result: string;
   image: string;
   tags: string[];
@@ -24,6 +24,21 @@ export interface Project {
   features?: string[];
   client?: string;
   modules?: ProjectModule[];
+  outcome?: string;
+  // Extended Case Study Fields
+  businessProblem?: string;
+  productChallenge?: string;
+  usersPersonas?: string[];
+  constraints?: string[];
+  productStrategy?: string;
+  prioritization?: string;
+  technicalArchitecture?: string;
+  stakeholders?: string[];
+  executionMethodology?: string;
+  lessonsLearned?: string[];
+  recruiterTakeaway?: string;
+  seoKeywords?: string[];
+  visualsSuggestion?: string;
 }
 
 export interface ExperienceItem {
