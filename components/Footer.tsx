@@ -99,6 +99,7 @@ const Footer: React.FC<FooterProps> = ({ onOpenAdmin, totalVisits = 0, liveUsers
               <h4 className="text-[10px] font-black text-foreground uppercase tracking-[0.4em]">Navigation</h4>
               <nav className="flex flex-col gap-4">
                 <a href="#about" className="text-sm font-bold hover:text-primary transition-colors">Documentation</a>
+                <a href="/resume" className="text-sm font-bold hover:text-primary transition-colors">Operational Dossier (Resume)</a>
                 <a href="#projects" className="text-sm font-bold hover:text-primary transition-colors">Infrastructure</a>
                 <a href="#skills" className="text-sm font-bold hover:text-primary transition-colors">Capabilities</a>
               </nav>

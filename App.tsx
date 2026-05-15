@@ -19,6 +19,7 @@ import ScrollToTop from './components/ScrollToTop';
 import PortfolioAI from './components/PortfolioAI';
 import ThreeScene from './components/ThreeScene';
 import CaseStudyDetail from './components/CaseStudyDetail';
+import Resume from './components/Resume';
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
@@ -151,6 +152,7 @@ const AppContent: React.FC = () => {
       <Routes>
         <Route path="/" element={<Home mainRef={mainRef} />} />
         <Route path="/project/:id" element={<CaseStudyDetail />} />
+        <Route path="/resume" element={<Resume />} />
       </Routes>
 
       <Footer 

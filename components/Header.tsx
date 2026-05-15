@@ -8,6 +8,7 @@ const navItems = [
   { label: 'Skill', href: '#skills', id: 'skills' },
   { label: 'Experience', href: '#experience', id: 'experience' },
   { label: 'Projects', href: '#projects', id: 'projects' },
+  { label: 'Resume', href: '/resume', id: 'resume' },
   { label: 'Contact', href: '#contact', id: 'contact' },
 ];
 
@@ -31,7 +32,8 @@ const Header: React.FC<HeaderProps> = ({ theme, toggleTheme }) => {
     };
 
     if (location.pathname !== '/') {
-      setActiveSection('');
+      const activeItem = navItems.find(item => item.href === location.pathname);
+      setActiveSection(activeItem ? activeItem.id : '');
       return;
     }
 
@@ -74,9 +76,14 @@ const Header: React.FC<HeaderProps> = ({ theme, toggleTheme }) => {
     };
   }, [location.pathname]);
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string, href: string) => {
     e.preventDefault();
     setIsOpen(false);
+
+    if (href.startsWith('/')) {
+      navigate(href);
+      return;
+    }
 
     if (location.pathname !== '/') {
       navigate(`/#${id}`);
@@ -161,7 +168,7 @@ const Header: React.FC<HeaderProps> = ({ theme, toggleTheme }) => {
                   <a
                     key={item.label}
                     href={item.href}
-                    onClick={(e) => handleNavClick(e, item.id)}
+                    onClick={(e) => handleNavClick(e, item.id, item.href)}
                     className={`px-6 py-2 rounded-xl text-sm font-bold transition-all duration-300 ${
                       activeSection === item.id
                         ? 'bg-background text-primary shadow-sm border border-border'
@@ -214,7 +221,7 @@ const Header: React.FC<HeaderProps> = ({ theme, toggleTheme }) => {
                   ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/20' 
                   : 'text-muted-foreground hover:bg-accent'
               }`}
-              onClick={(e) => handleNavClick(e, item.id)}
+              onClick={(e) => handleNavClick(e, item.id, item.href)}
             >
               {item.label}
             </a>
