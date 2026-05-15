@@ -156,7 +156,7 @@ const Contact: React.FC = () => {
           {/* Contact Info Column (Left) */}
           <div className="w-full lg:w-5/12 mb-12 lg:mb-0">
             <div className={`mb-10 transition-all duration-700 ease-out transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8'}`}>
-              <h2 className="text-4xl font-bold mb-6 tracking-tight text-foreground">Let's Connect</h2>
+              <h2 className="text-4xl lg:text-5xl font-black mb-8 tracking-tight text-foreground uppercase">Contact & Collaboration</h2>
               <p className="text-muted-foreground text-lg leading-relaxed opacity-90">
                 I'm available to lead high-impact projects and drive product delivery excellence. 
                 {isUnlocked 

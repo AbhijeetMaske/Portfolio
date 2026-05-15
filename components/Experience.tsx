@@ -75,10 +75,10 @@ const Experience: React.FC = () => {
   }, []);
 
   return (
-    <section id="experience" className="py-24 bg-transparent relative overflow-hidden" aria-label="Professional Experience">
+    <section id="experience" className="py-24 bg-transparent relative overflow-hidden" aria-label="Professional Career & Product Leadership">
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-20">
-          <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">Professional Experience</h2>
+          <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">Professional Career & Product Leadership</h2>
           <div className="w-20 h-1.5 bg-primary mx-auto rounded-full mb-6" aria-hidden="true"></div>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
             A track record of delivering scalable solutions and driving operational excellence.
@@ -214,7 +214,7 @@ const Experience: React.FC = () => {
         </div>
         <div className="mt-24 pt-20 border-t border-border">
           <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">Education & Languages</h2>
+            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">Educational Background & Languages</h2>
             <div className="w-20 h-1.5 bg-primary mx-auto rounded-full mb-6" aria-hidden="true"></div>
           </div>
 

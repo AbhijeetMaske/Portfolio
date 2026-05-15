@@ -54,7 +54,7 @@ const Skills: React.FC = () => {
 
       <div className="container mx-auto px-4 relative">
         <div className="text-center mb-16">
-          <h2 className="text-3xl lg:text-5xl font-black text-foreground mb-6 uppercase tracking-tight">Technical Skill</h2>
+          <h2 className="text-3xl lg:text-5xl font-black text-foreground mb-6 uppercase tracking-tight">Core Technical Product Management Skills</h2>
           <div className="w-24 h-2 bg-primary mx-auto rounded-full mb-8" aria-label="Section Divider"></div>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg lg:text-xl font-medium">
             A comprehensive stack of strategic, tactical, and technological capabilities refined through 9+ years of leadership.

@@ -40,8 +40,8 @@ const Testimonials: React.FC = () => {
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-3xl lg:text-4xl font-bold mb-4 text-foreground">Endorsements & Recognition</h2>
-          <div className="w-20 h-1.5 bg-primary mx-auto rounded-full mb-6" aria-hidden="true"></div>
+          <h2 className="text-3xl lg:text-5xl font-black mb-6 text-foreground uppercase tracking-tight">Strategic Endorsements & Recognition</h2>
+          <div className="w-24 h-2 bg-primary mx-auto rounded-full mb-8" aria-hidden="true"></div>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
             Feedback and awards reflecting my commitment to delivery excellence.
           </p>

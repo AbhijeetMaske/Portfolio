@@ -486,8 +486,8 @@ const Projects: React.FC = () => {
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center mb-16 gap-6">
           <div className="text-center md:text-left">
-            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-2">Portfolio Overview</h2>
-            <div className="w-20 h-1.5 bg-primary rounded-full mb-4 mx-auto md:mx-0" aria-hidden="true"></div>
+            <h2 className="text-3xl lg:text-5xl font-black text-foreground mb-4 uppercase tracking-tight">Technical Product Management Case Studies</h2>
+            <div className="w-24 h-2 bg-primary rounded-full mb-6 mx-auto md:mx-0" aria-hidden="true"></div>
             <p className="text-muted-foreground max-w-xl text-lg">
               Strategic initiatives and platform scaling projects.
             </p>

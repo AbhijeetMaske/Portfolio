@@ -37,8 +37,8 @@ const Methodology: React.FC = () => {
     <section className="py-20 bg-transparent" aria-label="My Methodology">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">How I Work</h2>
-          <div className="w-20 h-1.5 bg-primary mx-auto rounded-full mb-6" aria-hidden="true"></div>
+          <h2 className="text-3xl lg:text-5xl font-black text-foreground mb-6 uppercase tracking-tight">Product Management Philosophy & Methodology</h2>
+          <div className="w-24 h-2 bg-primary mx-auto rounded-full mb-8" aria-hidden="true"></div>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
             A structured, agile-driven approach to turning complex requirements into scalable solutions.
           </p>

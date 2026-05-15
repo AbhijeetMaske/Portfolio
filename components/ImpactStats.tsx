@@ -96,6 +96,7 @@ const ImpactStats: React.FC = () => {
       className="py-16 bg-transparent -mt-12 relative z-10 container mx-auto px-4" 
       aria-label="Impact Statistics"
     >
+      <h2 className="sr-only">Key Performance Indicators & Professional Impact</h2>
       <div className="bg-card/90 rounded-[2.5rem] shadow-xl border border-border p-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12 backdrop-blur-xl">
         {stats.map((stat) => (
           <Counter 
