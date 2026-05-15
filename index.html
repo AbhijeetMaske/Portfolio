@@ -20,30 +20,64 @@
     <meta property="og:description" content="9+ years of experience architecting mission-critical SaaS ecosystems and leading AI-integrated platform strategies.">
     <meta property="og:image" content="https://abhijeetmaske.com/og-image.jpg">
 
-    <!-- JSON-LD Profile Schema -->
+    <!-- SEO & Structured Data -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Abhijeet Maske",
-        "jobTitle": "Senior Technical Product Manager",
-        "url": "https://abhijeetmaske.com",
-        "sameAs": [
-          "https://www.linkedin.com/in/abhijeet-r-maske",
-          "https://github.com/AbhijeetMaske"
-        ],
-        "knowsAbout": [
-          "SaaS Product Management",
-          "AI Product Strategy",
-          "Enterprise Platforms",
-          "API Integrations",
-          "Agile Delivery"
-        ],
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Pune",
-          "addressCountry": "India"
-        }
+        "@graph": [
+          {
+            "@type": "Person",
+            "@id": "https://abhijeetmaske.com/#person",
+            "name": "Abhijeet Maske",
+            "jobTitle": "Senior Technical Product Manager",
+            "url": "https://abhijeetmaske.com",
+            "sameAs": [
+              "https://www.linkedin.com/in/abhijeet-r-maske",
+              "https://github.com/AbhijeetMaske"
+            ],
+            "knowsAbout": [
+              "Enterprise SaaS",
+              "AI Product Strategy",
+              "API Product Management",
+              "Agile Leadership"
+            ],
+            "description": "Sr. Technical Product Manager with 9+ years experience in scaling SaaS and AI platforms.",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Pune",
+              "addressCountry": "India"
+            }
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://abhijeetmaske.com/#website",
+            "url": "https://abhijeetmaske.com",
+            "name": "Abhijeet Maske Portfolio",
+            "publisher": { "@id": "https://abhijeetmaske.com/#person" }
+          },
+          {
+            "@type": "ProfilePage",
+            "url": "https://abhijeetmaske.com",
+            "mainEntity": { "@id": "https://abhijeetmaske.com/#person" }
+          },
+          {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://abhijeetmaske.com"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Projects",
+                "item": "https://abhijeetmaske.com/#projects"
+              }
+            ]
+          }
+        ]
       }
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
